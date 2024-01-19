@@ -3,10 +3,14 @@
 WATCHED_DIR="/watch"
 LAST_CHECK_DIRS="/tmp/checked_dirs.txt"
 
-create_structure() {
+process_directory() {
     for folder in $FOLDERS; do
         mkdir -p "$1/$folder"
     done
+    
+    if [ $DATESTAMP ]; then
+        mv "$1" "$(dirname "$1")/$(date +$DATESTAMP)_$(basename "$1")"
+    fi
 }
 
 is_dir_empty() {
@@ -23,7 +27,7 @@ while true; do
             if ! grep -Fxq "$dir_name" $LAST_CHECK_DIRS; then
                 if is_dir_empty "$dir"; then
                     echo "New empty found: $dir"
-                    create_structure "$dir"
+                    process_directory "$dir"
                     echo "$dir_name" >> $LAST_CHECK_DIRS
                 fi
             fi

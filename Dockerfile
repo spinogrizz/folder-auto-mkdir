@@ -1,9 +1,9 @@
 FROM alpine:latest
 
 MAINTAINER gryzlov@gmail.com
-LABEL version="0.1"
+LABEL version="0.2.2"
 LABEL maintainer="Denis Gryzlov"
-LABEL release-date="2023-01-16"
+LABEL release-date="2023-01-19"
 
 ENV FOLDERS="source out"
 
